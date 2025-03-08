@@ -3,15 +3,15 @@ var finalCount = 0;
 var keep = 360;
 var plotSize = 2;
 var d = 200;
-var a = 1.672;
+var a = 1.618;
 var bAndDSize = 0.85;
 var aToCAdd = 15;
-var baseRingStart = 100;
+var baseRingStart = 15;
 var endText = '';
-var wrapTotal = 620; 
+var wrapTotal = 2000; 
 var windowHeight = 500;
 var windowWidth = 700;
-var lineWidth = 0.5;
+var lineWidth = 1;
 var tilt = radians(-15);
 
 function plotRing(start) {
@@ -29,36 +29,11 @@ plotRing((keep / numberOfRings) * 1);
 // plotRing((keep / numberOfRings) * 2);
 // plotRing((keep / numberOfRings) * 3);
 
-var extra = `blinewidth ${lineWidth} all
-windowsize ${windowWidth} ${windowHeight}
-drawframe no
-asetticks x no
-asetticks y no
-asetminticks x no
-asetminticks y no
-framewidth 0
-bstyle yes no no no no no no yes no no 0
-margins 0 0 0 0
-range x ${-plotSize} ${plotSize}
-range y ${-plotSize} ${plotSize}`;
+var extra = 'blinewidth ' + lineWidth + ' all' + '</br>' + 'windowsize ' + windowWidth + ' ' + windowHeight + '</br>' + 'drawframe no' + '</br>' + 'asetticks x no' + '</br>' + 'asetticks y no' + '</br>' + 'asetminticks x no' + '</br>' + 'asetminticks y no' + '</br>' +'framewidth 0' + '</br>' + 'bstyle yes no no no no no no yes no no 0' + '</br>' + 'margins 0 0 0 0' + '</br>' + 'range x '  + -plotSize + ' ' + plotSize+ '</br>' + 'range y ' + -plotSize + ' ' + plotSize;
+var loc = '</br>' + 'savejpg /Users/thomasschuyler/Desktop/auto3/1.jpg' + '</br>' + 'close';
+var finish = 'new' + '</br>' + endText + '</br>' + extra + '</br>' + loc;
 
-var finish = `new\n${endText}\n${extra}`; // ❌ No "execute"
-
-function downloadMacros() {
-    let blob = new Blob([finish], { type: "text/plain" });
-    let a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = "plot2_script.p2m"; // ✅ Ensure correct extension
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-}
+var element = document.getElementById('p1');
+element.innerHTML = finish + '</br>';
 
 
-
-
-// Add a button to trigger the download
-var button = document.createElement("button");
-button.innerText = "Download Macros";
-button.onclick = downloadMacros;
-document.body.appendChild(button);
