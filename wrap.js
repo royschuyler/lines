@@ -35,18 +35,18 @@ function makeShape(d,a,bAndDSize,baseRingStart,ringStart,aToCAdd,sizeForColor,wr
   //MAKING WRAPS *** See WrapLib
   var wrapAx = wrapXFun(wrapRadArr,aAndBStart,pathx,sizeForColor);
   var wrapAy = wrapYFun(pathx,e,wrapRadArr,aAndBStart,pathy,sizeForColor);
-  var wrapBx = wrapXFun(wrapRadArr,aAndBStart,pathx,bAndDSize);
-  var wrapBy = wrapYFun(pathx,e,wrapRadArr,aAndBStart,pathy,bAndDSize);
-  var wrapCx = wrapXFun(wrapRadArr,cAndDStart,pathx,sizeForColor);
-  var wrapCy = wrapYFun(pathx,e,wrapRadArr,cAndDStart,pathy,sizeForColor);
-  var wrapDx = wrapXFun(wrapRadArr,cAndDStart,pathx,bAndDSize);
-  var wrapDy = wrapYFun(pathx,e,wrapRadArr,cAndDStart,pathy,bAndDSize);
+  //var wrapBx = wrapXFun(wrapRadArr,aAndBStart,pathx,bAndDSize);
+  //var wrapBy = wrapYFun(pathx,e,wrapRadArr,aAndBStart,pathy,bAndDSize);
+  //var wrapCx = wrapXFun(wrapRadArr,cAndDStart,pathx,sizeForColor);
+  //var wrapCy = wrapYFun(pathx,e,wrapRadArr,cAndDStart,pathy,sizeForColor);
+  //var wrapDx = wrapXFun(wrapRadArr,cAndDStart,pathx,bAndDSize);
+  //var wrapDy = wrapYFun(pathx,e,wrapRadArr,cAndDStart,pathy,bAndDSize);
 
   //PUTING WRAPS IN OBJ
   obj.a = twistIt(wrapAx,wrapAy,tilt);
-  obj.b = twistIt(wrapBx,wrapBy,tilt);
-  obj.c = twistIt(wrapCx,wrapCy,tilt);
-  obj.d = twistIt(wrapDx,wrapDy,tilt);
+  //obj.b = twistIt(wrapBx,wrapBy,tilt);
+  //obj.c = twistIt(wrapCx,wrapCy,tilt);
+  //obj.d = twistIt(wrapDx,wrapDy,tilt);
 
   // obj.a.y = wrapAy;
   // obj.b.y = wrapBy;
