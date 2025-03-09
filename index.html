@@ -10,6 +10,7 @@
         canvas { display: block; }
         .controls { position: absolute; top: 10px; left: 10px; background: rgba(255,255,255,0.9); padding: 10px; border-radius: 5px; }
         input { width: 200px; }
+        button { margin-top: 10px; padding: 10px; border: none; background: black; color: white; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -26,17 +27,19 @@
         <input type="range" id="degrees" min="360" max="5000" step="10" value="1440"><br><br>
 
         <label>Spiral Rate: <span id="rateValue">2</span></label><br>
-        <input type="range" id="rate" min="0.01" max="5" step="0.1" value="2"><br><br>
+        <input type="range" id="rate" min="-2" max="2" step="0.05" value="2"><br><br>
 
         <label>Resolution: <span id="resValue">500</span></label><br>
         <input type="range" id="res" min="100" max="2000" step="50" value="500"><br><br>
+
+        <button id="download">Download Image</button>
     </div>
 
     <script>
         // SETUP THREE.JS SCENE
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setClearColor(0xffffff); // White background
         document.body.appendChild(renderer.domElement);
@@ -61,7 +64,8 @@
             // New function to emphasize wrapping near poles
             function wrapDistribution(t, rate) {
                 const k = Math.pow(t, rate) / (Math.pow(t, rate) + Math.pow(1 - t, rate));
-                return (1 - k) * 0.75 + k * 0.25; // Adjusts spiral accumulation near poles
+                //return (1 - k) * 0.75 + k * 0.25; // Adjusts spiral accumulation near poles
+                return (1 - k) * 2 + k * -2; // Adjusts spiral accumulation near poles
             }
 
             const adjustedT = theta.map(t => wrapDistribution((t + Math.PI / 2) / Math.PI, rate));
@@ -137,6 +141,14 @@
 
         // INITIAL SPIRAL CREATION
         createSpiral();
+
+        // DOWNLOAD FUNCTION
+        document.getElementById("download").addEventListener("click", () => {
+            const link = document.createElement('a');
+            link.href = renderer.domElement.toDataURL('image/png');
+            link.download = 'spiral.png';
+            link.click();
+        });
     </script>
 
 </body>
