@@ -11,6 +11,10 @@ function abs(n){
   return Math.abs(n)
 }
 
+function power(x, y) {
+    return Math.pow(x, y);
+}
+
 //TRIG******************************************************
 function sin (x) {
   return Math.sin(x)
